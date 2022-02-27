@@ -49,15 +49,15 @@ passport.use(new BasicStrategy(
 ))
 
 app.get('/users', (req, res) => {
-  const validationResult = userInfoArrayValidator(res.body)
+ // const validationResult = userInfoArrayValidator(res.body)
 
-  if (validationResult) {
+ // if (validationResult) {
     res.json(arrayUsers)
     res.sendStatus(200)
-  }
-  else {
-    res.sendStatus(418)
-  }
+ // }
+//  else {
+ //   res.sendStatus(418)
+//  }
   
 })
 
