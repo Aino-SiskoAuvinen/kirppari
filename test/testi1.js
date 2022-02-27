@@ -121,5 +121,390 @@ describe('Kirppari API Tests', function() {
         })
       })
     })
+<<<<<<< Updated upstream
+=======
+  describe('POST /login', function(){
+    it('should reject logging when password is incorrect', function(done){
+      chai.request(serverAddress)
+        .post('/login')
+        .auth('vanhaukki', 'kuhiaasettia')
+        .send({
+          username: "vanhaukki",
+          password: "jtainkauheaasotkua"
+        })
+        .end(function(err, res) {
+          expect(err).to.be.null;
+          expect(res).to.have.status(401);
+          done();
+        })
+    })
+    it('should reject logging when username is incorrect', function(done){
+      chai.request(serverAddress)
+        .post('/login')
+        .auth('anhaukki', 'kauhiaasettia')
+        .send({
+          username: "anhaukki",
+          password: "kauhiaasettia"
+        })
+        .end(function(err, res) {
+          expect(err).to.be.null;
+          expect(res).to.have.status(401);
+          done();
+        })
+    })
+    it('should log in with correct password and username', function(done){
+      chai.request(serverAddress)
+        .post('/login')
+        .auth('vanhaukki', 'kauhiaasettia')
+        .send({
+          username: 'vanhaukki',
+          password: 'kauhiaasettia'
+        })
+        .end(function(err, res) {
+          expect(err).to.be.null;
+          expect(res).to.have.status(200);
+          jwtToken = res.body.token;
+          done();
+        })
+    })
+  })
+  describe('Get /items', function(){
+    it('should return all items', function(done) {
+      chai.request(serverAddress)
+      .get('/items')
+      .end(function(err, res) {
+        expect(err).to.be.null;
+        expect(res).to.have.status(200);
+        expect(res.body).to.be.jsonSchema(itemArraySchema)
+        done();
+      })
+    })
+  })
+  describe('Add new item data', function(){
+    it('should accept item data when data is correct', function(done){
+      chai.request(serverAddress)
+        .post('/items')
+        .auth(jwtToken, {type: 'bearer'})
+        .send({
+          title: "tonttu", 
+          description: "pieni",
+          price: "20 €", 
+          category: "sisustus",
+          creationDay: "2022-02-27", 
+          Shipping: false, 
+          Pickup: true, 
+          image1: "", 
+          image2: "", 
+          image3: "", 
+          image4: "" 
+        })
+        .end(function(err, res) {
+          expect(err).to.be.null;
+          expect(res).to.have.status(201);
+          done();
+        })
+    })
+    it('should reject data if not logged in', function(done){
+      chai.request(serverAddress)
+        .post('/items')
+        .send({
+          title: "tonttu", 
+          description: "pieni",
+          price: "20 €", 
+          category: "sisustus",
+          creationDay: "2022-02-27", 
+          Shipping: false, 
+          Pickup: true, 
+          image1: "", 
+          image2: "", 
+          image3: "", 
+          image4: "" 
+        })
+        .end(function(err, res) {
+          expect(err).to.be.null;
+          expect(res).to.have.status(401);
+          done();
+        })
+    })
+    it('should reject data if missing fields', function(done){
+      chai.request(serverAddress)
+        .post('/items')
+        .auth(jwtToken, {type: 'bearer'})
+        .send({
+          title: "tonttu", 
+          description: "pieni",
+          price: "20 €", 
+          creationDay: "2022-02-27", 
+          Shipping: false, 
+          Pickup: true, 
+          image1: "", 
+          image2: "", 
+          image3: "", 
+          image4: "" 
+        })
+        .end(function(err, res) {
+          expect(err).to.be.null;
+          expect(res).to.have.status(400);
+          done();
+        })
+    })
+    it('should reject data with incorrect datatypes', function(done){
+      chai.request(serverAddress)
+        .post('/items')
+        .auth(jwtToken, {type: 'bearer'})
+        .send({
+          title: "tonttu", 
+          description: "pieni",
+          price: 20, 
+          category: "sisustus",
+          creationDay: "2022-02-27", 
+          Shipping: false, 
+          Pickup: true, 
+          image1: "", 
+          image2: "", 
+          image3: "", 
+          image4: "" 
+        })
+        .end(function(err, res) {
+          expect(err).to.be.null;
+          expect(res).to.have.status(400);
+          done();
+        })
+    })
+    it('should contain added item data', function(done){
+      chai.request(serverAddress)
+      .get('/items')
+      .end(function(err, res) {
+        expect(err).to.be.null;
+        expect(res).to.have.status(200);
+      
+        
+        let found = false;
+      
+        for(let i=0; i<res.body.length; i++){
+          if((res.body[i].title=='tonttu') && (res.body[i].description=='pieni') &&
+          (res.body[i].price=='20 €') && (res.body[i].category=='sisustus') &&
+          (res.body[i].creationDay=='2022-02-27') && (res.body[i].Shipping==false) &&
+          (res.body[i].Pickup==true) && (res.body[i].username=="vanhaukki")){
+              found = true;
+              itemId = res.body[i].itemId
+              break;
+            }
+          }
+        if(found == false) {
+          assert.fail('Data not saved')
+        }
+        done();
+      })
+    })
+  })
+  describe('put /items/id/:id', function(){
+    it('should accept correct data', function(done){
+      address = '/items/id/' + itemId
+      chai.request(serverAddress)
+      .put(address)
+      .auth(jwtToken, {type: 'bearer'})
+      .send({
+        title: "tonttu", 
+        description: "suuri",
+        price: "20 €", 
+        category: "sisustus",
+        creationDay: "2022-02-27", 
+        email: "jokinmuu@gmail.com",
+        location: "Korvatunturi",
+        Shipping: false, 
+        Pickup: true, 
+        image1: "", 
+        image2: "", 
+        image3: "", 
+        image4: "" 
+      })
+      .end(function(err, res) {
+        expect(err).to.be.null;
+        expect(res).to.have.status(202);
+        done();
+      })
+    })
+    it('should reject modification if missing fields', function(done) {
+      address = '/items/id/' + itemId
+      chai.request(serverAddress)
+      .put(address)
+      .auth(jwtToken, {type: 'bearer'})
+      .send({
+        title: "tonttu", 
+        description: "suuri", 
+        category: "sisustus",
+        creationDay: "2022-02-27", 
+        email: "jokinmuu@gmail.com",
+        location: "Korvatunturi",
+        Shipping: false, 
+        Pickup: true, 
+        image1: "", 
+        image2: "", 
+        image3: "", 
+        image4: "" 
+      })
+      .end(function(err, res) {
+        expect(err).to.be.null;
+        expect(res).to.have.status(400);
+        done();
+      })
+    })
+    it('should reject modification if wrong types of date', function(done) {
+      address = '/items/id/' + itemId
+      chai.request(serverAddress)
+      .put(address)
+      .auth(jwtToken, {type: 'bearer'})
+      .send({
+        title: "tonttu", 
+        description: "suuri",
+        price: 30, 
+        category: "sisustus",
+        creationDay: "2022-02-27", 
+        email: "jokinmuu@gmail.com",
+        location: "Korvatunturi",
+        Shipping: false, 
+        Pickup: true, 
+        image1: "", 
+        image2: "", 
+        image3: "", 
+        image4: "" 
+      })
+      .end(function(err, res) {
+        expect(err).to.be.null;
+        expect(res).to.have.status(400);
+        done();
+      })
+    })
+    it('should reject modification if not logged in', function(done) {
+      address = '/items/id/' + itemId
+      chai.request(serverAddress)
+      .put(address)
+      .send({
+        title: "tonttu", 
+        description: "suuri",
+        price: "20 €", 
+        category: "sisustus",
+        creationDay: "2022-02-27", 
+        email: "jokinmuu@gmail.com",
+        location: "Korvatunturi",
+        Shipping: false, 
+        Pickup: true, 
+        image1: "", 
+        image2: "", 
+        image3: "", 
+        image4: "" 
+      })
+      .end(function(err, res) {
+        expect(err).to.be.null;
+        expect(res).to.have.status(401);
+        done();
+      })
+    })
+    it('should contain modified item data', function(done){
+      chai.request(serverAddress)
+      .get('/items')
+      .end(function(err, res) {
+        expect(err).to.be.null;
+        expect(res).to.have.status(200);
+      
+        
+        let found = false;
+      
+        for(let i=0; i<res.body.length; i++){
+          if((res.body[i].title=='tonttu') && (res.body[i].description=='suuri') &&
+          (res.body[i].price=='20 €') && (res.body[i].category=='sisustus') &&
+          (res.body[i].creationDay=='2022-02-27') && (res.body[i].Shipping==false) &&
+          (res.body[i].Pickup==true) && (res.body[i].username=="vanhaukki")){
+              found = true;
+              itemId = res.body[i].itemId
+              break;
+            }
+          }
+        if(found == false) {
+          assert.fail('Data not saved')
+        }
+        done();
+      })
+    })
+  })
+  describe('del /items/id:id', function(){
+    it('should reject deletion if not authorized', function(done) {
+      address = '/items/id/' + itemId
+      chai.request(serverAddress)
+      .del(address)
+      .end(function(err, res) {
+        expect(err).to.be.null;
+        expect(res).to.have.status(401);
+        done();
+      })
+    })
+    it('should delete item when authorized', function(done){
+      address = '/items/id/' + itemId
+      chai.request(serverAddress)
+      .del(address)
+      .auth(jwtToken, {type: 'bearer'})
+      .end(function(err, res) {
+        expect(err).to.be.null;
+        expect(res).to.have.status(202);
+        done();
+      })
+    })
+    it('should not find deleted item', function(done){
+      address = '/items/id/' + itemId
+      chai.request(serverAddress)
+      .get(address)
+      .end(function(err, res) {
+        expect(err).to.be.null;
+        expect(res).to.have.status(404);
+      
+        
+        let found = false;
+      
+        for(let i=0; i<res.body.length; i++){
+          if(res.body[i].itemId==itemId){
+              assert.fail('Item was not deleted')
+            }
+          }
+        done();
+      })
+    })
+  })
+
+  describe('get /items/searchCondition', function(){
+    it('should find items by location', function(done){
+      address = '/items/location/Linnanmaki'
+      chai.request(serverAddress)
+      .get(address)
+      .end(function(err, res) {
+        expect(err).to.be.null;
+        expect(res).to.have.status(200);
+        done()
+      })
+    })
+    it('should find items by category', function(done){
+      address = '/items/location/vaatteet'
+      chai.request(serverAddress)
+      .get(address)
+      .end(function(err, res) {
+        expect(err).to.be.null;
+        expect(res).to.have.status(200);
+        done()
+      })
+    })
+    it('should find items by date', function(done){
+      address = '/items/location/2022-02-24'
+      chai.request(serverAddress)
+      .get(address)
+      .end(function(err, res) {
+        expect(err).to.be.null;
+        expect(res).to.have.status(200);
+        done()
+      })
+    })
+  })
+
+  
+>>>>>>> Stashed changes
   
 })
