@@ -10,7 +10,7 @@ chai.use(chaiJsonSchemaAjv);
 
 const userArraySchema = require('../schemas/usersArray.schema.json');
 const itemArraySchema = require('../schemas/itemInfoArray.schema.json')
-const serverAddress = 'https://kirppari.herokuapp.com/'
+const serverAddress = 'https://kirppari.herokuapp.com'
 
 var jwtToken = ""
 var itemId = ""
@@ -19,13 +19,13 @@ var address =""
 
 describe('Kirppari API Tests', function() {
 
-  /*before(function() {
+  before(function() {
     server.start();
   });
 
   after(function() {
     server.close();
-  })*/
+  })
 
   describe('Get /users', function() {
     it('should return all users', function(done) {
