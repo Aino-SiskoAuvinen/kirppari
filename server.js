@@ -1,19 +1,21 @@
 const express = require('express')
 const app = express()
 const port = (process.env.PORT ||80)
+//const port = 3000
 const bodyParser = require('body-parser')
 //const users = require('./routes/users')
 const items = require('./routes/items')
 const passport = require('passport')
 const BasicStrategy = require('passport-http').BasicStrategy
 const secretKey = (process.env.jwtKey || 80)
+//const secretKey = "salainenavain"
 const { v4: uuidv4 } = require('uuid');
 const bcrypt = require('bcryptjs')
 const Ajv = require('ajv')
 const ajv = new Ajv()
 const userInfoSchema = require('./schemas/userInfo.schema.json')
 const userInfoModifySchema = require('./schemas/userInfoModify.schema.json')
-//const userInfoArraySchema = require('./schemas/userInfoArray.schema.json')
+const userInfoArraySchema = require('./schemas/usersArray.schema.json')
 const arrayUsers = [
   {
     "userId": "142",
@@ -43,21 +45,21 @@ passport.use(new BasicStrategy(
       done(null, user)
     }
     else {
-      dine(null, false)
+      done(null, false)
     }    
   }
 ))
 
 app.get('/users', (req, res) => {
- // const validationResult = userInfoArrayValidator(res.body)
+  const validationResult = userInfoArrayValidator(arrayUsers)
 
- // if (validationResult) {
+  if (validationResult) {
     res.json(arrayUsers)
     res.sendStatus(200)
- // }
-//  else {
- //   res.sendStatus(418)
-//  }
+  }
+  else {
+    res.sendStatus(418)
+  }
   
 })
 
@@ -69,7 +71,13 @@ app.get('/users/:id', passport.authenticate('jwt', {session: false}), (req, res)
   }
   else {
     if (arrayUsers[foundIndex].username == req.user.username){
-      res.json(arrayUsers[foundIndex])
+      const validationResult = userInfoArrayValidator(arrayUsers[foundIndex])
+      if (validationResult){
+        res.json(arrayUsers[foundIndex])
+      }
+      else {
+        res.sendStatus(418)
+      }
     }
     else {
       res.sendStatus(401)
