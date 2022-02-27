@@ -13,6 +13,7 @@ const Ajv = require('ajv')
 const ajv = new Ajv()
 const userInfoSchema = require('./schemas/userInfo.schema.json')
 const userInfoModifySchema = require('./schemas/userInfoModify.schema.json')
+const userInfoArraySchema = require('./schemas/userInfoArray.schema.json')
 const arrayUsers = [
   {
     "userId": "142",
@@ -20,7 +21,7 @@ const arrayUsers = [
     "lastName": "Smith",
     "email": "alice.smith@gmail.com",
     "phoneNumber": "040-1231234",
-    "location": "Linnanmaki",
+    //"location": "Linnanmaki",
     "username": "alice",
     "password": "jotainkauheaasotkua"
   }
@@ -30,6 +31,7 @@ app.use(bodyParser.json())
 
 const userInfoValidator = ajv.compile(userInfoSchema)
 const userInfoModifyValidator = ajv.compile(userInfoModifySchema)
+const userInfoArrayValidator = ajv.compile(userInfoArraySchema)
 
 
 
@@ -47,8 +49,16 @@ passport.use(new BasicStrategy(
 ))
 
 app.get('/users', (req, res) => {
-  res.json(arrayUsers)
-  res.sendStatus(200)
+  const validationResult = userInfoArrayValidator(res.body)
+
+  if (validationResult) {
+    res.json(arrayUsers)
+    res.sendStatus(200)
+  }
+  else {
+    res.sendStatus(418)
+  }
+  
 })
 
 app.get('/users/:id', passport.authenticate('jwt', {session: false}), (req, res) => {
