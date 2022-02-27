@@ -21,7 +21,7 @@ const arrayUsers = [
     "lastName": "Smith",
     "email": "alice.smith@gmail.com",
     "phoneNumber": "040-1231234",
-    //"location": "Linnanmaki",
+    "location": "Linnanmaki",
     "username": "alice",
     "password": "jotainkauheaasotkua"
   }
