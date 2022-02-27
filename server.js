@@ -13,7 +13,7 @@ const Ajv = require('ajv')
 const ajv = new Ajv()
 const userInfoSchema = require('./schemas/userInfo.schema.json')
 const userInfoModifySchema = require('./schemas/userInfoModify.schema.json')
-const userInfoArraySchema = require('./schemas/userInfoArray.schema.json')
+//const userInfoArraySchema = require('./schemas/userInfoArray.schema.json')
 const arrayUsers = [
   {
     "userId": "142",
