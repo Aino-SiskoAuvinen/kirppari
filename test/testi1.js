@@ -19,13 +19,13 @@ var address =""
 
 describe('Kirppari API Tests', function() {
 
-  before(function() {
+  /*before(function() {
     server.start();
   });
 
   after(function() {
     server.close();
-  })
+  })*/
 
   describe('Get /users', function() {
     it('should return all users', function(done) {
