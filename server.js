@@ -6,6 +6,7 @@ const bodyParser = require('body-parser')
 const items = require('./routes/items')
 const passport = require('passport')
 const BasicStrategy = require('passport-http').BasicStrategy
+const secretKey = (process.env.jwtKey || 80)
 const { v4: uuidv4 } = require('uuid');
 const bcrypt = require('bcryptjs')
 const Ajv = require('ajv')
@@ -147,7 +148,7 @@ const JwtStrategy = require('passport-jwt').Strategy,
     ExtractJwt = require('passport-jwt').ExtractJwt;
 let jwtValidationOption = {}
 jwtValidationOption.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-jwtValidationOption.secretOrKey = (process.env.jwtKey || 80);
+jwtValidationOption.secretOrKey = secretKey;
 
 passport.use(new JwtStrategy(jwtValidationOption, function(jwt_payload, done) {
     
@@ -161,7 +162,7 @@ app.post('/login', passport.authenticate('basic', {session: false}), (req, res) 
     user: req.user.username
   }
 
-  const token = jwt.sign(payLoad, secrets.jwtSignKey)
+  const token = jwt.sign(payLoad, secretKey)
 
   res.json({token : token})
 })
