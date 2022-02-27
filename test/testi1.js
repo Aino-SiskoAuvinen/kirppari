@@ -10,7 +10,7 @@ chai.use(chaiJsonSchemaAjv);
 
 const userArraySchema = require('../schemas/usersArray.schema.json');
 const itemArraySchema = require('../schemas/itemInfoArray.schema.json')
-const serverAddress = 'https://kirppari.herokuapp.com/'
+const serverAddress = 'https://kirppari.herokuapp.com'
 
 var jwtToken = ""
 var itemId = ""
