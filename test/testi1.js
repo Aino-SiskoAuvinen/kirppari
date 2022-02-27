@@ -8,17 +8,19 @@ const chaiJsonSchemaAjv = require('chai-json-schema-ajv');
 chai.use(chaiJsonSchemaAjv);
 
 const userArraySchema = require('../schemas/usersArray.schema.json');
-const serverAddress = 'http://localhost:3000'
+const serverAddress = 'https://kirppari.herokuapp.com/'
 
 describe('Kirppari API Tests', function() {
 
-  before(function() {
+
+ /* before(function() {
+
     server.start();
   });
 
   after(function() {
     server.close();
-  })
+  })*/
 
   describe('Get /users', function() {
     it('should return all users', function(done) {
@@ -121,8 +123,6 @@ describe('Kirppari API Tests', function() {
         })
       })
     })
-<<<<<<< Updated upstream
-=======
   describe('POST /login', function(){
     it('should reject logging when password is incorrect', function(done){
       chai.request(serverAddress)
@@ -505,6 +505,5 @@ describe('Kirppari API Tests', function() {
   })
 
   
->>>>>>> Stashed changes
   
 })
