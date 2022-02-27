@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = process.env.PORT 
+const port = (process.env.PORT ||80)
 const bodyParser = require('body-parser')
 //const users = require('./routes/users')
 const items = require('./routes/items')
@@ -8,7 +8,6 @@ const passport = require('passport')
 const BasicStrategy = require('passport-http').BasicStrategy
 const { v4: uuidv4 } = require('uuid');
 const bcrypt = require('bcryptjs')
-const secrets = require('./secret.json')
 const Ajv = require('ajv')
 const ajv = new Ajv()
 const userInfoSchema = require('./schemas/userInfo.schema.json')
@@ -148,7 +147,7 @@ const JwtStrategy = require('passport-jwt').Strategy,
     ExtractJwt = require('passport-jwt').ExtractJwt;
 let jwtValidationOption = {}
 jwtValidationOption.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-jwtValidationOption.secretOrKey = secrets.jwtSignKey;
+jwtValidationOption.secretOrKey = (process.env.jwtKey || 80);
 
 passport.use(new JwtStrategy(jwtValidationOption, function(jwt_payload, done) {
     
