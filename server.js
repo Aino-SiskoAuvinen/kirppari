@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = (process.env.PORT || 80);
+const port = process.env.PORT 
 const bodyParser = require('body-parser')
 //const users = require('./routes/users')
 const items = require('./routes/items')
