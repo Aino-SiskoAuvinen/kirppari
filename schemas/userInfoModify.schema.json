@@ -1,0 +1,79 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "http://example.com/example4.json",
+    "type": "object",
+    "title": "The user schema",
+    "description": "Descripes a user schema.",
+    "default": {},
+    "examples": [
+        {
+            "firstName": "Alice",
+            "lastName": "Smith",
+            "email": "alice.smith@gmail.com",
+            "phoneNumber": "040-1231234",
+            "location": "Linnanmaki"
+        }
+    ],
+    "required": [
+        "firstName",
+        "lastName",
+        "email",
+        "phoneNumber",
+        "location"
+    ],
+    "properties": {
+        
+        "firstName": {
+            "$id": "#/properties/firstName",
+            "type": "string",
+            "title": "Descripes users first name value",
+            "description": "Users first name.",
+            "default": "",
+            "examples": [
+                "Alice"
+            ]
+        },
+        "lastName": {
+            "$id": "#/properties/lastName",
+            "type": "string",
+            "title": "Descripes users last name value",
+            "description": "Users last name",
+            "default": "",
+            "examples": [
+                "Smith"
+            ]
+        },
+        "email": {
+            "$id": "#/properties/email",
+            "type": "string",
+            "title": "Descripes users email value",
+            "description": "Users email address.",
+            "default": "",
+            "examples": [
+                "alice.smith@gmail.com"
+            ]
+        },
+        "phoneNumber": {
+            "$id": "#/properties/phoneNumber",
+            "type": "string",
+            "title": "Descripes users phonenumber value",
+            "description": "Users phonenumber.",
+            "default": "",
+            "examples": [
+                "040-1231234"
+            ]
+        },
+        "location": {
+            "$id": "#/properties/location",
+            "type": "string",
+            "title": "Descripes users location value",
+            "description": "Users location.",
+            "default": "",
+            "examples": [
+                "Linnanmaki"
+            ]
+        }
+        
+    },
+    "additionalProperties": true
+}

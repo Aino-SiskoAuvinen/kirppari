@@ -1,0 +1,157 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "http://example.com/example2.json",
+    "type": "object",
+    "title": "The item schema",
+    "description": "The item schema descripes an item",
+    "default": {},
+    "examples": [
+        {
+            "title": "hammasharja",
+            "description": "vähän käytetty Jordanin hammasharja",
+            "price": "5 €",
+            "category": "hygienia",
+            "location": "Oulu",
+            "email": "hammaspeikko@gmail.com",
+            "Shipping": false,
+            "Pickup": true,
+            "image1": "",
+            "image2": "",
+            "image3": "",
+            "image4": ""
+        }
+    ],
+    "required": [
+        "title",
+        "description",
+        "price",
+        "category",
+        "location",
+        "email",
+        "Shipping",
+        "Pickup"
+    ],
+    "properties": {
+        "title": {
+            "$id": "#/properties/title",
+            "type": "string",
+            "title": "Descripes item title value",
+            "description": "Name of an item",
+            "default": "",
+            "examples": [
+                "hammasharja"
+            ]
+        },
+        "description": {
+            "$id": "#/properties/description",
+            "type": "string",
+            "title": "Descripes item description value",
+            "description": "Descripes the item ",
+            "default": "",
+            "examples": [
+                "vähän käytetty Jordanin hammasharja"
+            ]
+        },
+        "price": {
+            "$id": "#/properties/price",
+            "type": "string",
+            "title": "Descripes item price value",
+            "description": "Descripes items price",
+            "default": "",
+            "examples": [
+                "5 €"
+            ]
+        },
+        "category": {
+            "$id": "#/properties/category",
+            "type": "string",
+            "title": "Descripes item category value",
+            "description": "Value tells wich category item belongs to",
+            "default": "",
+            "examples": [
+                "hygienia"
+            ]
+        },
+        "location": {
+            "$id": "#/properties/location",
+            "type": "string",
+            "title": "Descripes item location value",
+            "description": "Descripes where item is sold",
+            "default": "",
+            "examples": [
+                "Oulu"
+            ]
+        },
+        "email": {
+            "$id": "#/properties/email",
+            "type": "string",
+            "title": "Descripes user email value",
+            "description": "Email of the seller",
+            "default": "",
+            "examples": [
+                "hammaspeikko@gmail.com"
+            ]
+        },
+        "Shipping": {
+            "$id": "#/properties/Shipping",
+            "type": "boolean",
+            "title": "Descripes item shipping value",
+            "description": "Tells wether seller is willing to post the item",
+            "default": false,
+            "examples": [
+                false
+            ]
+        },
+        "Pickup": {
+            "$id": "#/properties/Pickup",
+            "type": "boolean",
+            "title": "Descripes item pickup value",
+            "description": "Tells wether seller is willing to do business face-to-face.",
+            "default": false,
+            "examples": [
+                true
+            ]
+        },
+        "image1": {
+            "$id": "#/properties/image1",
+            "type": "string",
+            "title": "The image1 schema",
+            "description": "URL of 1. image",
+            "default": "",
+            "examples": [
+                ""
+            ]
+        },
+        "image2": {
+            "$id": "#/properties/image2",
+            "type": "string",
+            "title": "The image2 schema",
+            "description": "URL of 2. image",
+            "default": "",
+            "examples": [
+                ""
+            ]
+        },
+        "image3": {
+            "$id": "#/properties/image3",
+            "type": "string",
+            "title": "The image3 schema",
+            "description": "URL of 3. image.",
+            "default": "",
+            "examples": [
+                ""
+            ]
+        },
+        "image4": {
+            "$id": "#/properties/image4",
+            "type": "string",
+            "title": "The image4 schema",
+            "description": "URL of 4. image.",
+            "default": "",
+            "examples": [
+                ""
+            ]
+        }
+    },
+    "additionalProperties": true
+}

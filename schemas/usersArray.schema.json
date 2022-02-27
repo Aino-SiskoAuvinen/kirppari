@@ -1,0 +1,139 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "http://example.com/example.json",
+    "type": "array",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": [],
+    "examples": [
+        [
+            {
+                "userId": "142",
+                "firstName": "Alice",
+                "lastName": "Smith",
+                "email": "alice.smith@gmail.com",
+                "phoneNumber": "040-1231234",
+                "location": "Linnanmaki",
+                "username": "alice",
+                "password": "jotainkauheaasotkua"
+            }
+        ]
+    ],
+    "items": {
+        "$id": "#/items",
+        "anyOf": [
+            {
+                "$id": "#/items/anyOf/0",
+                "type": "object",
+                "title": "The first anyOf schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": {},
+                "examples": [
+                    {
+                        "userId": "142",
+                        "firstName": "Alice",
+                        "lastName": "Smith",
+                        "email": "alice.smith@gmail.com",
+                        "phoneNumber": "040-1231234",
+                        "location": "Linnanmaki",
+                        "username": "alice",
+                        "password": "jotainkauheaasotkua"
+                    }
+                ],
+                "required": [
+                    "userId",
+                    "firstName",
+                    "lastName",
+                    "email",
+                    "phoneNumber",
+                    "location",
+                    "username",
+                    "password"
+                ],
+                "properties": {
+                    "userId": {
+                        "$id": "#/items/anyOf/0/properties/userId",
+                        "type": "string",
+                        "title": "The userId schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                            "142"
+                        ]
+                    },
+                    "firstName": {
+                        "$id": "#/items/anyOf/0/properties/firstName",
+                        "type": "string",
+                        "title": "The firstName schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                            "Alice"
+                        ]
+                    },
+                    "lastName": {
+                        "$id": "#/items/anyOf/0/properties/lastName",
+                        "type": "string",
+                        "title": "The lastName schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                            "Smith"
+                        ]
+                    },
+                    "email": {
+                        "$id": "#/items/anyOf/0/properties/email",
+                        "type": "string",
+                        "title": "The email schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                            "alice.smith@gmail.com"
+                        ]
+                    },
+                    "phoneNumber": {
+                        "$id": "#/items/anyOf/0/properties/phoneNumber",
+                        "type": "string",
+                        "title": "The phoneNumber schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                            "040-1231234"
+                        ]
+                    },
+                    "location": {
+                        "$id": "#/items/anyOf/0/properties/location",
+                        "type": "string",
+                        "title": "The location schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                            "Linnanmaki"
+                        ]
+                    },
+                    "username": {
+                        "$id": "#/items/anyOf/0/properties/username",
+                        "type": "string",
+                        "title": "The username schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                            "alice"
+                        ]
+                    },
+                    "password": {
+                        "$id": "#/items/anyOf/0/properties/password",
+                        "type": "string",
+                        "title": "The password schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                            "jotainkauheaasotkua"
+                        ]
+                    }
+                },
+                "additionalProperties": true
+            }
+        ]
+    }
+}

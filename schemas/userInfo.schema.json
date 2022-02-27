@@ -1,0 +1,113 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "http://example.com/example3.json",
+    "type": "object",
+    "title": "The user schema",
+    "description": "Descripes a user schema.",
+    "default": {},
+    "examples": [
+        {
+            "userId": "142",
+            "firstName": "Alice",
+            "lastName": "Smith",
+            "email": "alice.smith@gmail.com",
+            "phoneNumber": "040-1231234",
+            "location": "Linnanmaki",
+            "username": "alice",
+            "password": "jotainkauheaasotkua"
+        }
+    ],
+    "required": [
+        "userId",
+        "firstName",
+        "lastName",
+        "email",
+        "phoneNumber",
+        "location",
+        "username",
+        "password"
+    ],
+    "properties": {
+        "userId": {
+            "$id": "#/properties/userId",
+            "type": "string",
+            "title": "Descripes users Id value",
+            "description": "Unique value identifies a user.",
+            "default": 0,
+            "examples": [
+                "142"
+            ]
+        },
+        "firstName": {
+            "$id": "#/properties/firstName",
+            "type": "string",
+            "title": "Descripes users first name value",
+            "description": "Users first name.",
+            "default": "",
+            "examples": [
+                "Alice"
+            ]
+        },
+        "lastName": {
+            "$id": "#/properties/lastName",
+            "type": "string",
+            "title": "Descripes users last name value",
+            "description": "Users last name",
+            "default": "",
+            "examples": [
+                "Smith"
+            ]
+        },
+        "email": {
+            "$id": "#/properties/email",
+            "type": "string",
+            "title": "Descripes users email value",
+            "description": "Users email address.",
+            "default": "",
+            "examples": [
+                "alice.smith@gmail.com"
+            ]
+        },
+        "phoneNumber": {
+            "$id": "#/properties/phoneNumber",
+            "type": "string",
+            "title": "Descripes users phonenumber value",
+            "description": "Users phonenumber.",
+            "default": "",
+            "examples": [
+                "040-1231234"
+            ]
+        },
+        "location": {
+            "$id": "#/properties/location",
+            "type": "string",
+            "title": "Descripes users location value",
+            "description": "Users location.",
+            "default": "",
+            "examples": [
+                "Linnanmaki"
+            ]
+        },
+        "username": {
+            "$id": "#/properties/username",
+            "type": "string",
+            "title": "Descripes users username value",
+            "description": "Unique username for user.",
+            "default": "",
+            "examples": [
+                "alice"
+            ]
+        },
+        "password": {
+            "$id": "#/properties/password",
+            "type": "string",
+            "title": "Descripes users password value",
+            "description": "Users hashed password.",
+            "default": "",
+            "examples": [
+                "jotainkauheaasotkua"
+            ]
+        }
+    },
+    "additionalProperties": true
+}
