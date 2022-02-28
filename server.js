@@ -1,18 +1,21 @@
 const express = require('express')
 const app = express()
-const port = 3000
+const port = (process.env.PORT ||80)
+//const port = 3000
 const bodyParser = require('body-parser')
 //const users = require('./routes/users')
 const items = require('./routes/items')
 const passport = require('passport')
 const BasicStrategy = require('passport-http').BasicStrategy
+const secretKey = (process.env.jwtKey || 80)
+//const secretKey = "salainenavain"
 const { v4: uuidv4 } = require('uuid');
 const bcrypt = require('bcryptjs')
-const secrets = require('./secret.json')
 const Ajv = require('ajv')
 const ajv = new Ajv()
 const userInfoSchema = require('./schemas/userInfo.schema.json')
 const userInfoModifySchema = require('./schemas/userInfoModify.schema.json')
+const userInfoArraySchema = require('./schemas/usersArray.schema.json')
 const arrayUsers = [
   {
     "userId": "142",
@@ -30,6 +33,7 @@ app.use(bodyParser.json())
 
 const userInfoValidator = ajv.compile(userInfoSchema)
 const userInfoModifyValidator = ajv.compile(userInfoModifySchema)
+const userInfoArrayValidator = ajv.compile(userInfoArraySchema)
 
 
 
@@ -41,14 +45,22 @@ passport.use(new BasicStrategy(
       done(null, user)
     }
     else {
-      dine(null, false)
+      done(null, false)
     }    
   }
 ))
 
 app.get('/users', (req, res) => {
-  res.json(arrayUsers)
-  res.sendStatus(200)
+  const validationResult = userInfoArrayValidator(arrayUsers)
+
+  if (validationResult) {
+    res.json(arrayUsers)
+    res.sendStatus(200)
+  }
+  else {
+    res.sendStatus(418)
+  }
+  
 })
 
 app.get('/users/:id', passport.authenticate('jwt', {session: false}), (req, res) => {
@@ -59,7 +71,13 @@ app.get('/users/:id', passport.authenticate('jwt', {session: false}), (req, res)
   }
   else {
     if (arrayUsers[foundIndex].username == req.user.username){
-      res.json(arrayUsers[foundIndex])
+      const validationResult = userInfoArrayValidator(arrayUsers[foundIndex])
+      if (validationResult){
+        res.json(arrayUsers[foundIndex])
+      }
+      else {
+        res.sendStatus(418)
+      }
     }
     else {
       res.sendStatus(401)
@@ -148,7 +166,7 @@ const JwtStrategy = require('passport-jwt').Strategy,
     ExtractJwt = require('passport-jwt').ExtractJwt;
 let jwtValidationOption = {}
 jwtValidationOption.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-jwtValidationOption.secretOrKey = secrets.jwtSignKey;
+jwtValidationOption.secretOrKey = secretKey;
 
 passport.use(new JwtStrategy(jwtValidationOption, function(jwt_payload, done) {
     
@@ -162,7 +180,7 @@ app.post('/login', passport.authenticate('basic', {session: false}), (req, res) 
     user: req.user.username
   }
 
-  const token = jwt.sign(payLoad, secrets.jwtSignKey)
+  const token = jwt.sign(payLoad, secretKey)
 
   res.json({token : token})
 })

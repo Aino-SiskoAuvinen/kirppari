@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema",
-    "$id": "http://example.com/example10.json",
+    "$id": "http://example.com/example8.json",
     "type": "array",
     "title": "The root schema",
     "description": "The root schema comprises the entire JSON document.",
@@ -8,17 +8,17 @@
     "examples": [
         [
             {
-                "itemId": "1",
-                "title": "hammasharja",
-                "description": "vähän käytetty Jordanin hammasharja",
-                "price": "5 €",
-                "category": "hygienia",
-                "creationDay": "2019-08-24",
-                "location": "Oulu",
-                "username": "hammaspeikko",
-                "email": "hammaspeikko@gmail.com",
-                "Shipping": false,
+                "itemId": "7f5bd501-d908-4bb2-a138-5b476da0d1b7",
+                "title": "paskaa",
+                "description": "paketissa",
+                "price": "1000",
+                "category": "nautintoaineet",
+                "creationDay": "2022-02-24",
+                "Shipping": true,
                 "Pickup": true,
+                "username": "muumi",
+                "location": "Linnanmaki",
+                "email": "alice.smith@gmail.com",
                 "image1": "",
                 "image2": "",
                 "image3": "",
@@ -37,17 +37,17 @@
                 "default": {},
                 "examples": [
                     {
-                        "itemId": "1",
-                        "title": "hammasharja",
-                        "description": "vähän käytetty Jordanin hammasharja",
-                        "price": "5 €",
-                        "category": "hygienia",
-                        "creationDay": "2019-08-24",
-                        "location": "Oulu",
-                        "username": "hammaspeikko",
-                        "email": "hammaspeikko@gmail.com",
-                        "Shipping": false,
+                        "itemId": "7f5bd501-d908-4bb2-a138-5b476da0d1b7",
+                        "title": "paskaa",
+                        "description": "paketissa",
+                        "price": "1000",
+                        "category": "nautintoaineet",
+                        "creationDay": "2022-02-24",
+                        "Shipping": true,
                         "Pickup": true,
+                        "username": "muumi",
+                        "location": "Linnanmaki",
+                        "email": "alice.smith@gmail.com",
                         "image1": "",
                         "image2": "",
                         "image3": "",
@@ -61,11 +61,11 @@
                     "price",
                     "category",
                     "creationDay",
-                    "location",
-                    "username",
-                    "email",
                     "Shipping",
                     "Pickup",
+                    "username",
+                    "location",
+                    "email",
                     "image1",
                     "image2",
                     "image3",
@@ -79,7 +79,8 @@
                         "description": "An explanation about the purpose of this instance.",
                         "default": "",
                         "examples": [
-                            "1"
+
+                            "7f5bd501-d908-4bb2-a138-5b476da0d1b7"
                         ]
                     },
                     "title": {
@@ -89,7 +90,7 @@
                         "description": "An explanation about the purpose of this instance.",
                         "default": "",
                         "examples": [
-                            "hammasharja"
+                            "paskaa"
                         ]
                     },
                     "description": {
@@ -99,7 +100,7 @@
                         "description": "An explanation about the purpose of this instance.",
                         "default": "",
                         "examples": [
-                            "vähän käytetty Jordanin hammasharja"
+                            "paketissa"
                         ]
                     },
                     "price": {
@@ -109,7 +110,7 @@
                         "description": "An explanation about the purpose of this instance.",
                         "default": "",
                         "examples": [
-                            "5 €"
+                            "1000"
                         ]
                     },
                     "category": {
@@ -119,7 +120,7 @@
                         "description": "An explanation about the purpose of this instance.",
                         "default": "",
                         "examples": [
-                            "hygienia"
+                            "nautintoaineet"
                         ]
                     },
                     "creationDay": {
@@ -129,37 +130,7 @@
                         "description": "An explanation about the purpose of this instance.",
                         "default": "",
                         "examples": [
-                            "2019-08-24"
-                        ]
-                    },
-                    "location": {
-                        "$id": "#/items/anyOf/0/properties/location",
-                        "type": "string",
-                        "title": "The location schema",
-                        "description": "An explanation about the purpose of this instance.",
-                        "default": "",
-                        "examples": [
-                            "Oulu"
-                        ]
-                    },
-                    "username": {
-                        "$id": "#/items/anyOf/0/properties/username",
-                        "type": "string",
-                        "title": "The username schema",
-                        "description": "An explanation about the purpose of this instance.",
-                        "default": "",
-                        "examples": [
-                            "hammaspeikko"
-                        ]
-                    },
-                    "email": {
-                        "$id": "#/items/anyOf/0/properties/email",
-                        "type": "string",
-                        "title": "The email schema",
-                        "description": "An explanation about the purpose of this instance.",
-                        "default": "",
-                        "examples": [
-                            "hammaspeikko@gmail.com"
+                            "2022-02-24"
                         ]
                     },
                     "Shipping": {
@@ -169,7 +140,7 @@
                         "description": "An explanation about the purpose of this instance.",
                         "default": false,
                         "examples": [
-                            false
+                            true
                         ]
                     },
                     "Pickup": {
@@ -180,6 +151,36 @@
                         "default": false,
                         "examples": [
                             true
+                        ]
+                    },
+                    "username": {
+                        "$id": "#/items/anyOf/0/properties/username",
+                        "type": "string",
+                        "title": "The username schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                            "muumi"
+                        ]
+                    },
+                    "location": {
+                        "$id": "#/items/anyOf/0/properties/location",
+                        "type": "string",
+                        "title": "The location schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                            "Linnanmaki"
+                        ]
+                    },
+                    "email": {
+                        "$id": "#/items/anyOf/0/properties/email",
+                        "type": "string",
+                        "title": "The email schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                            "alice.smith@gmail.com"
                         ]
                     },
                     "image1": {

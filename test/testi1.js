@@ -7,16 +7,21 @@ const server = require('../server');
 const chaiJsonSchemaAjv = require('chai-json-schema-ajv');
 chai.use(chaiJsonSchemaAjv);
 
+
 const userArraySchema = require('../schemas/usersArray.schema.json');
 const itemArraySchema = require('../schemas/itemInfoArray.schema.json')
 const itemSchema = require('../schemas/itemInfo.schema.json')
 const serverAddress = 'https://kirppari.herokuapp.com'
+var jwtToken = ""
+var itemId = ""
+var address =""
+
+
+
 
 describe('Kirppari API Tests', function() {
 
-
- /* before(function() {
-
+  /*before(function() {
     server.start();
   });
 
@@ -430,6 +435,7 @@ describe('Kirppari API Tests', function() {
       })
     })
   })
+
   describe('get /items/searchCondition', function(){
     it('should find items by location', function(done){
       address = '/items/location/Linnanmaki'
@@ -476,6 +482,7 @@ describe('Kirppari API Tests', function() {
       })
     })
   })
+
   describe('del /items/id:id', function(){
     it('should reject deletion if not authorized', function(done) {
       address = '/items/id/' + itemId
@@ -518,9 +525,5 @@ describe('Kirppari API Tests', function() {
       })
     })
   })
-
-  
-
-  
   
 })

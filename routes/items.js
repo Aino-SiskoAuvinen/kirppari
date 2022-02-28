@@ -6,61 +6,56 @@ const Ajv = require('ajv')
 const ajv = new Ajv()
 const itemInfoSchema = require('../schemas/itemInfo.schema.json')
 const itemInfoModifySchema = require('../schemas/itemInfoModify.schema.json')
+const itemInfoArraySchema = require('../schemas/itemInfoArray.schema.json')
 const itemInfoValidator = ajv.compile(itemInfoSchema)
 const itemInfoModifyValidator = ajv.compile(itemInfoModifySchema)
+const itemInfoArrayValidator = ajv.compile(itemInfoArraySchema)
 
 
 const items =[{
-    "itemId": uuidv4(),
-    "title": "hammasharja", 
-    "description": "vähän käytetty Jordanin hammasharja",
-    "price": "5 €", 
-    "category": "hygienia",
-    "creationDay": "2019-08-24", 
-    "location": "Oulu",
-    "Shipping": false, 
-    "Pickup": true,
-    "userId": uuidv4(),  
-    "image1": null, 
-    "image2": null, 
-    "image3": null, 
-    "image4": null  
-  },
-  {
-    "itemId": uuidv4(),
-    "title": "bumerangi", 
-    "description": "aito kiinapiraatti",
-    "price": "15 €", 
-    "category": "lelut",
-    "creationDay": "2019-08-24", 
-    "location": "Puumala",
-    "Shipping": false, 
-    "Pickup": true,
-    "userId": "1",  
-    "image1": null, 
-    "image2": null, 
-    "image3": null, 
-    "image4": null  
-  },
-  {
-    "itemId": uuidv4(),
-    "title": "villasukat", 
-    "description": "koko 37",
-    "price": "5 €", 
-    "category": "vaatteet",
-    "creationDay": "2019-08-24",  
-    "location": "Puumala",
-    "Shipping": false, 
-    "Pickup": true,  
-    "userId": "2",   
-    "image1": null, 
-    "image2": null, 
-    "image3": null, 
-    "image4": null  
-  }]
+  "itemId": "7f5bd501-d908-4bb2-a138-5b476da0d1b7",
+  "title": "paskaa",
+  "description": "paketissa",
+  "price": "1000",
+  "category": "nautintoaineet",
+  "creationDay": "2022-02-24",
+  "Shipping": true,
+  "Pickup": true,
+  "username": "muumi",
+  "location": "Linnanmaki",
+  "email": "alice.smith@gmail.com",
+  "image1": "",
+  "image2": "",
+  "image3": "",
+  "image4": ""
+},
+{
+  "itemId": "7f5bd501-d908-4bb2-a138-5b476da0d1",
+  "title": "lisaa paskaa",
+  "description": "paketissa",
+  "price": "2000",
+  "category": "nautintoaineet",
+  "creationDay": "2022-02-24",
+  "Shipping": true,
+  "Pickup": true,
+  "username": "muumi",
+  "location": "Linnanmaki",
+  "email": "alice.smith@gmail.com",
+  "image1": "",
+  "image2": "",
+  "image3": "",
+  "image4": ""
+}]
 
 router.get('/', (req, res) => {
-    res.json(items)
+    const validationResult = itemInfoArrayValidator(items)
+    if (validationResult) {
+      res.json(items)
+      res.sendStatus(200)
+    }
+    else {
+      res.sendStatus(418)
+   }
   })
 
 router.get('/id/:id', (req, res) => {
@@ -70,7 +65,14 @@ router.get('/id/:id', (req, res) => {
         res.sendStatus(404)
     }
     else {
+      const validationResult = itemInfoValidator(items[foundIndex])  
+      if (validationResult){
         res.json(items[foundIndex])
+      }
+      else {
+        res.sendStatus(418)
+      }
+      
     }
   })
   
@@ -162,25 +164,31 @@ router.put('/id/:id' ,passport.authenticate('jwt', {session: false}), (req, res)
   })
 
   router.get('/location/:location', (req, res) => {
-    //console.log(req.query)
     console.log(req.params.location)
     const result = []
     for (var i in items){
-      if (items[i].location == req.params.location)
-        result.push(items[i])
+      if (items[i].location == req.params.location){
+        const validationResult = itemInfoValidator(items[i])
+        if (validationResult){
+          result.push(items[i])
+        }
+      }
+        
     }
-    console.log(result)
-    res.json(result)
+    res.json(result)   
   })
 
   router.get('/category/:category', (req, res) => {
     console.log(req.params.category)
     const result = []
     for (var i in items){
-      if (items[i].category == req.params.category)
-        result.push(items[i])
+      if (items[i].category == req.params.category){
+        const validationResult = itemInfoValidator(items[i])
+        if (validationResult){
+          result.push(items[i])
+        }
+      }
     }
-    console.log(result)
     res.json(result)
   })
 
@@ -188,11 +196,15 @@ router.put('/id/:id' ,passport.authenticate('jwt', {session: false}), (req, res)
     console.log(req.params.creationDay)
     const result = []
     for (var i in items){
-      if (items[i].creationDay == req.params.creationDay)
-        result.push(items[i])
+      if (items[i].creationDay == req.params.creationDay){
+        const validationResult = itemInfoValidator(items[i])
+        if (validationResult){
+          result.push(items[i])
+        }
+      }
     }
-    console.log(result)
     res.json(result)
+    res.sendStatus(200)
   })
 
   module.exports = router
