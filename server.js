@@ -132,30 +132,6 @@ app.post('/users', (req, res) => {
   }
   })
 
-app.put('/users/:id' , passport.authenticate('jwt', {session: false}), (req, res) => {
-  let foundUser = arrayUsers.find(t => t.userId == req.params.id)
-  if(foundUser){
-    const validationResult = userInfoModifyValidator(req.body)
-    if(validationResult){
-      if(foundUser.username == req.user.username){
-        foundUser.firstName = req.body.firstName,     
-        foundUser.lastName = req.body.lastName,     
-        foundUser.email = req.body.email,           
-        foundUser.phoneNumber = req.body.phoneNumber,     
-        foundUser.location = req.body.location,
-        res.sendStatus(202)
-      }
-      else {
-        res.sendStatus(401)
-      }}
-      else {
-        res.sendStatus(400)
-      }}
-  else{
-    res.sendStatus(404)
-  }
-  })
-
 
 app.get('/', (req, res) => {
   res.send('Welcome to Kirppari!')
