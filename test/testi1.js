@@ -12,6 +12,7 @@ const userArraySchema = require('../schemas/usersArray.schema.json');
 const itemArraySchema = require('../schemas/itemInfoArray.schema.json')
 const itemSchema = require('../schemas/itemInfo.schema.json')
 const serverAddress = 'https://kirppari.herokuapp.com'
+//const serverAddress = 'localhost:3000'
 var jwtToken = ""
 var itemId = ""
 var address =""
@@ -21,7 +22,7 @@ var address =""
 
 describe('Kirppari API Tests', function() {
 
-  /*before(function() {
+ /* before(function() {
     server.start();
   });
 
@@ -74,7 +75,7 @@ describe('Kirppari API Tests', function() {
         })
         .end(function(err, res) {
           expect(err).to.be.null;
-          expect(res).to.have.status(400);
+          expect(res).to.have.status(409);
           done();
         })
       })
@@ -92,7 +93,7 @@ describe('Kirppari API Tests', function() {
         })
         .end(function(err, res) {
           expect(err).to.be.null;
-          expect(res).to.have.status(400);
+          expect(res).to.have.status(409);
           done();
         })
       })

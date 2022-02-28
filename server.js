@@ -123,7 +123,7 @@ app.post('/users', (req, res) => {
   )
 
   for (var i in arrayUsers){
-    if((arrayUsers[i].username==temp[0].username) || (arrayUsers[i].email==temp[0].email)){
+    if((arrayUsers[i].username==req.body.username) || (arrayUsers[i].email==req.body.email)){
       res.sendStatus(409)
     }
   }
