@@ -139,7 +139,6 @@ app.post('/users', (req, res) => {
   })
 
 
-
 app.get('/', (req, res) => {
   res.send('Welcome to Kirppari!')
 })
