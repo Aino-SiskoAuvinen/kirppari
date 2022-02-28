@@ -54,7 +54,21 @@ app.get('/users', (req, res) => {
   const validationResult = userInfoArrayValidator(arrayUsers)
 
   if (validationResult) {
-    res.json(arrayUsers)
+    const temp = []
+    for (var i in arrayUsers){
+      temp.push(
+        {
+          userId: arrayUsers[i].userId,
+          firstName: arrayUsers[i].firstName,     
+          lastName: arrayUsers[i].lastName,
+          username: arrayUsers[i].username,     
+          email: arrayUsers[i].email,          
+          phoneNumber: arrayUsers[i].phoneNumber,     
+          location: arrayUsers[i].location 
+          }
+      )
+    }
+    res.json(temp)
     res.sendStatus(200)
   }
   else {
@@ -71,9 +85,20 @@ app.get('/users/:id', passport.authenticate('jwt', {session: false}), (req, res)
   }
   else {
     if (arrayUsers[foundIndex].username == req.user.username){
-      const validationResult = userInfoArrayValidator(arrayUsers[foundIndex])
+      const validationResult = userInfoValidator(arrayUsers[foundIndex])
       if (validationResult){
-        res.json(arrayUsers[foundIndex])
+        const temp = []
+        temp.push(
+          {
+            userId: arrayUsers[foundIndex].userId,
+            firstName: arrayUsers[foundIndex].firstName,     
+            lastName: arrayUsers[foundIndex].lastName,
+            username: arrayUsers[foundIndex].username,     
+            email: arrayUsers[foundIndex].email,          
+            phoneNumber: arrayUsers[foundIndex].phoneNumber,     
+            location: arrayUsers[foundIndex].location 
+            })
+        res.json(temp)
       }
       else {
         res.sendStatus(418)
