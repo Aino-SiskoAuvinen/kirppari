@@ -129,6 +129,42 @@ describe('Kirppari API Tests', function() {
           done();
         })
       })
+      it('should reject data if email is taken', function(done){
+        chai.request(serverAddress)
+        .post('/users')
+        .send({
+          firstName: "Joulu",
+          lastName: "Pukki",
+          email: "pukinpaja@gmail.com",
+          phoneNumber: "040-1231234",
+          location: "Korvatunturi",
+          username: "vanhaukki",
+          password: "kauhiaasettia"
+        })
+        .end(function(err, res) {
+          expect(err).to.be.null;
+          expect(res).to.have.status(409);
+          done();
+        })
+      })
+      it('should reject data if username is taken', function(done){
+        chai.request(serverAddress)
+        .post('/users')
+        .send({
+          firstName: "Joulu",
+          lastName: "Pukki",
+          email: "pukinpaja@gmail.com",
+          phoneNumber: "040-1231234",
+          location: "Korvatunturi",
+          username: "vanhaukki",
+          password: "kauhiaasettia"
+        })
+        .end(function(err, res) {
+          expect(err).to.be.null;
+          expect(res).to.have.status(409);
+          done();
+        })
+      })
     })
   describe('POST /login', function(){
     it('should reject logging when password is incorrect', function(done){
