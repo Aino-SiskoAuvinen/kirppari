@@ -8,7 +8,7 @@ const chaiJsonSchemaAjv = require('chai-json-schema-ajv');
 chai.use(chaiJsonSchemaAjv);
 
 const userArraySchema = require('../schemas/usersArray.schema.json');
-const serverAddress = 'https://kirppari.herokuapp.com/'
+const serverAddress = 'https://kirppari.herokuapp.com'
 
 describe('Kirppari API Tests', function() {
 
