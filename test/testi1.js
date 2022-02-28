@@ -8,6 +8,8 @@ const chaiJsonSchemaAjv = require('chai-json-schema-ajv');
 chai.use(chaiJsonSchemaAjv);
 
 const userArraySchema = require('../schemas/usersArray.schema.json');
+const itemArraySchema = require('../schemas/itemInfoArray.schema.json')
+const itemSchema = require('../schemas/itemInfo.schema.json')
 const serverAddress = 'https://kirppari.herokuapp.com'
 
 describe('Kirppari API Tests', function() {
@@ -428,6 +430,52 @@ describe('Kirppari API Tests', function() {
       })
     })
   })
+  describe('get /items/searchCondition', function(){
+    it('should find items by location', function(done){
+      address = '/items/location/Linnanmaki'
+      chai.request(serverAddress)
+      .get(address)
+      .end(function(err, res) {
+        expect(err).to.be.null;
+        expect(res.body).to.be.jsonSchema(itemArraySchema)
+        expect(res).to.have.status(200);
+        done()
+      })
+    })
+    it('should find items by category', function(done){
+      address = '/items/location/vaatteet'
+      chai.request(serverAddress)
+      .get(address)
+      .end(function(err, res) {
+        expect(err).to.be.null;
+        expect(res.body).to.be.jsonSchema(itemArraySchema)
+        expect(res).to.have.status(200);
+        done()
+      })
+    })
+    it('should find items by date', function(done){
+      address = '/items/location/2022-02-24'
+      chai.request(serverAddress)
+      .get(address)
+      .end(function(err, res) {
+        expect(err).to.be.null;
+        expect(res.body).to.be.jsonSchema(itemArraySchema)
+        expect(res).to.have.status(200);
+        done()
+      })
+    })
+    it('should find items by itemId', function(done) {
+      address = '/items/id/' +itemId
+      chai.request(serverAddress)
+      .get(address)
+      .end(function(err, res) {
+        expect(err).to.be.null;
+        expect(res.body).to.be.jsonSchema(itemSchema)
+        expect(res).to.have.status(200);
+        done()
+      })
+    })
+  })
   describe('del /items/id:id', function(){
     it('should reject deletion if not authorized', function(done) {
       address = '/items/id/' + itemId
@@ -471,38 +519,7 @@ describe('Kirppari API Tests', function() {
     })
   })
 
-  describe('get /items/searchCondition', function(){
-    it('should find items by location', function(done){
-      address = '/items/location/Linnanmaki'
-      chai.request(serverAddress)
-      .get(address)
-      .end(function(err, res) {
-        expect(err).to.be.null;
-        expect(res).to.have.status(200);
-        done()
-      })
-    })
-    it('should find items by category', function(done){
-      address = '/items/location/vaatteet'
-      chai.request(serverAddress)
-      .get(address)
-      .end(function(err, res) {
-        expect(err).to.be.null;
-        expect(res).to.have.status(200);
-        done()
-      })
-    })
-    it('should find items by date', function(done){
-      address = '/items/location/2022-02-24'
-      chai.request(serverAddress)
-      .get(address)
-      .end(function(err, res) {
-        expect(err).to.be.null;
-        expect(res).to.have.status(200);
-        done()
-      })
-    })
-  })
+  
 
   
   

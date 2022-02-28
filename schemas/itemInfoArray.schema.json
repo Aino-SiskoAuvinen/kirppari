@@ -1,0 +1,230 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "http://example.com/example10.json",
+    "type": "array",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": [],
+    "examples": [
+        [
+            {
+                "itemId": "1",
+                "title": "hammasharja",
+                "description": "vähän käytetty Jordanin hammasharja",
+                "price": "5 €",
+                "category": "hygienia",
+                "creationDay": "2019-08-24",
+                "location": "Oulu",
+                "username": "hammaspeikko",
+                "email": "hammaspeikko@gmail.com",
+                "Shipping": false,
+                "Pickup": true,
+                "image1": "",
+                "image2": "",
+                "image3": "",
+                "image4": ""
+            }
+        ]
+    ],
+    "items": {
+        "$id": "#/items",
+        "anyOf": [
+            {
+                "$id": "#/items/anyOf/0",
+                "type": "object",
+                "title": "The first anyOf schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": {},
+                "examples": [
+                    {
+                        "itemId": "1",
+                        "title": "hammasharja",
+                        "description": "vähän käytetty Jordanin hammasharja",
+                        "price": "5 €",
+                        "category": "hygienia",
+                        "creationDay": "2019-08-24",
+                        "location": "Oulu",
+                        "username": "hammaspeikko",
+                        "email": "hammaspeikko@gmail.com",
+                        "Shipping": false,
+                        "Pickup": true,
+                        "image1": "",
+                        "image2": "",
+                        "image3": "",
+                        "image4": ""
+                    }
+                ],
+                "required": [
+                    "itemId",
+                    "title",
+                    "description",
+                    "price",
+                    "category",
+                    "creationDay",
+                    "location",
+                    "username",
+                    "email",
+                    "Shipping",
+                    "Pickup",
+                    "image1",
+                    "image2",
+                    "image3",
+                    "image4"
+                ],
+                "properties": {
+                    "itemId": {
+                        "$id": "#/items/anyOf/0/properties/itemId",
+                        "type": "string",
+                        "title": "The itemId schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                            "1"
+                        ]
+                    },
+                    "title": {
+                        "$id": "#/items/anyOf/0/properties/title",
+                        "type": "string",
+                        "title": "The title schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                            "hammasharja"
+                        ]
+                    },
+                    "description": {
+                        "$id": "#/items/anyOf/0/properties/description",
+                        "type": "string",
+                        "title": "The description schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                            "vähän käytetty Jordanin hammasharja"
+                        ]
+                    },
+                    "price": {
+                        "$id": "#/items/anyOf/0/properties/price",
+                        "type": "string",
+                        "title": "The price schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                            "5 €"
+                        ]
+                    },
+                    "category": {
+                        "$id": "#/items/anyOf/0/properties/category",
+                        "type": "string",
+                        "title": "The category schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                            "hygienia"
+                        ]
+                    },
+                    "creationDay": {
+                        "$id": "#/items/anyOf/0/properties/creationDay",
+                        "type": "string",
+                        "title": "The creationDay schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                            "2019-08-24"
+                        ]
+                    },
+                    "location": {
+                        "$id": "#/items/anyOf/0/properties/location",
+                        "type": "string",
+                        "title": "The location schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                            "Oulu"
+                        ]
+                    },
+                    "username": {
+                        "$id": "#/items/anyOf/0/properties/username",
+                        "type": "string",
+                        "title": "The username schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                            "hammaspeikko"
+                        ]
+                    },
+                    "email": {
+                        "$id": "#/items/anyOf/0/properties/email",
+                        "type": "string",
+                        "title": "The email schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                            "hammaspeikko@gmail.com"
+                        ]
+                    },
+                    "Shipping": {
+                        "$id": "#/items/anyOf/0/properties/Shipping",
+                        "type": "boolean",
+                        "title": "The Shipping schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": false,
+                        "examples": [
+                            false
+                        ]
+                    },
+                    "Pickup": {
+                        "$id": "#/items/anyOf/0/properties/Pickup",
+                        "type": "boolean",
+                        "title": "The Pickup schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": false,
+                        "examples": [
+                            true
+                        ]
+                    },
+                    "image1": {
+                        "$id": "#/items/anyOf/0/properties/image1",
+                        "type": "string",
+                        "title": "The image1 schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                            ""
+                        ]
+                    },
+                    "image2": {
+                        "$id": "#/items/anyOf/0/properties/image2",
+                        "type": "string",
+                        "title": "The image2 schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                            ""
+                        ]
+                    },
+                    "image3": {
+                        "$id": "#/items/anyOf/0/properties/image3",
+                        "type": "string",
+                        "title": "The image3 schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                            ""
+                        ]
+                    },
+                    "image4": {
+                        "$id": "#/items/anyOf/0/properties/image4",
+                        "type": "string",
+                        "title": "The image4 schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                            ""
+                        ]
+                    }
+                },
+                "additionalProperties": true
+            }
+        ]
+    }
+}
