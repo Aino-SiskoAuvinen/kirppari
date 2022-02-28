@@ -10,16 +10,19 @@ chai.use(chaiJsonSchemaAjv);
 
 const userArraySchema = require('../schemas/usersArray.schema.json');
 const itemArraySchema = require('../schemas/itemInfoArray.schema.json')
+const itemSchema = require('../schemas/itemInfo.schema.json')
 const serverAddress = 'https://kirppari.herokuapp.com'
-
+//const serverAddress = 'localhost:3000'
 var jwtToken = ""
 var itemId = ""
 var address =""
 
 
+
+
 describe('Kirppari API Tests', function() {
 
-  /*before(function() {
+ /* before(function() {
     server.start();
   });
 
@@ -72,7 +75,7 @@ describe('Kirppari API Tests', function() {
         })
         .end(function(err, res) {
           expect(err).to.be.null;
-          expect(res).to.have.status(400);
+          expect(res).to.have.status(409);
           done();
         })
       })
@@ -90,7 +93,7 @@ describe('Kirppari API Tests', function() {
         })
         .end(function(err, res) {
           expect(err).to.be.null;
-          expect(res).to.have.status(400);
+          expect(res).to.have.status(409);
           done();
         })
       })
@@ -124,6 +127,42 @@ describe('Kirppari API Tests', function() {
           if(found == false) {
             assert.fail('Data not saved')
           }
+          done();
+        })
+      })
+      it('should reject data if email is taken', function(done){
+        chai.request(serverAddress)
+        .post('/users')
+        .send({
+          firstName: "Joulu",
+          lastName: "Pukki",
+          email: "pukinpaja@gmail.com",
+          phoneNumber: "040-1231234",
+          location: "Korvatunturi",
+          username: "vanhaukki",
+          password: "kauhiaasettia"
+        })
+        .end(function(err, res) {
+          expect(err).to.be.null;
+          expect(res).to.have.status(409);
+          done();
+        })
+      })
+      it('should reject data if username is taken', function(done){
+        chai.request(serverAddress)
+        .post('/users')
+        .send({
+          firstName: "Joulu",
+          lastName: "Pukki",
+          email: "pukinpaja@gmail.com",
+          phoneNumber: "040-1231234",
+          location: "Korvatunturi",
+          username: "vanhaukki",
+          password: "kauhiaasettia"
+        })
+        .end(function(err, res) {
+          expect(err).to.be.null;
+          expect(res).to.have.status(409);
           done();
         })
       })
@@ -433,6 +472,54 @@ describe('Kirppari API Tests', function() {
       })
     })
   })
+
+  describe('get /items/searchCondition', function(){
+    it('should find items by location', function(done){
+      address = '/items/location/Linnanmaki'
+      chai.request(serverAddress)
+      .get(address)
+      .end(function(err, res) {
+        expect(err).to.be.null;
+        expect(res.body).to.be.jsonSchema(itemArraySchema)
+        expect(res).to.have.status(200);
+        done()
+      })
+    })
+    it('should find items by category', function(done){
+      address = '/items/location/vaatteet'
+      chai.request(serverAddress)
+      .get(address)
+      .end(function(err, res) {
+        expect(err).to.be.null;
+        expect(res.body).to.be.jsonSchema(itemArraySchema)
+        expect(res).to.have.status(200);
+        done()
+      })
+    })
+    it('should find items by date', function(done){
+      address = '/items/location/2022-02-24'
+      chai.request(serverAddress)
+      .get(address)
+      .end(function(err, res) {
+        expect(err).to.be.null;
+        expect(res.body).to.be.jsonSchema(itemArraySchema)
+        expect(res).to.have.status(200);
+        done()
+      })
+    })
+    it('should find items by itemId', function(done) {
+      address = '/items/id/' +itemId
+      chai.request(serverAddress)
+      .get(address)
+      .end(function(err, res) {
+        expect(err).to.be.null;
+        expect(res.body).to.be.jsonSchema(itemSchema)
+        expect(res).to.have.status(200);
+        done()
+      })
+    })
+  })
+
   describe('del /items/id:id', function(){
     it('should reject deletion if not authorized', function(done) {
       address = '/items/id/' + itemId
@@ -475,40 +562,5 @@ describe('Kirppari API Tests', function() {
       })
     })
   })
-
-  describe('get /items/search', function(){
-    it('should find items by location', function(done){
-      address = '/items/location/Linnanmaki'
-      chai.request(serverAddress)
-      .get(address)
-      .end(function(err, res) {
-        expect(err).to.be.null;
-        expect(res).to.have.status(200);
-        done()
-      })
-    })
-    it('should find items by category', function(done){
-      address = '/items/location/vaatteet'
-      chai.request(serverAddress)
-      .get(address)
-      .end(function(err, res) {
-        expect(err).to.be.null;
-        expect(res).to.have.status(200);
-        done()
-      })
-    })
-    it('should find items by date', function(done){
-      address = '/items/location/2022-02-24'
-      chai.request(serverAddress)
-      .get(address)
-      .end(function(err, res) {
-        expect(err).to.be.null;
-        expect(res).to.have.status(200);
-        done()
-      })
-    })
-  })
-
-  
   
 })

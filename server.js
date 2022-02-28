@@ -121,6 +121,12 @@ app.post('/users', (req, res) => {
     location: req.body.location 
     }
   )
+
+  for (var i in arrayUsers){
+    if((arrayUsers[i].username==req.body.username) || (arrayUsers[i].email==req.body.email)){
+      res.sendStatus(409)
+    }
+  }
   const validationResult = userInfoValidator(temp[0])
 
   if(validationResult){
