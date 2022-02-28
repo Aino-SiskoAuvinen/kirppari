@@ -22,7 +22,7 @@ var address =""
 
 describe('Kirppari API Tests', function() {
 
- /* before(function() {
+  /*before(function() {
     server.start();
   });
 

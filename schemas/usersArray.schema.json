@@ -47,8 +47,7 @@
                     "email",
                     "phoneNumber",
                     "location",
-                    "username",
-                    "password"
+                    "username"
                 ],
                 "properties": {
                     "userId": {
