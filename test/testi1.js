@@ -1,5 +1,5 @@
 //aja testit localhost tilassa (riveiltä 28-34 kommentointi pois ja server.js:stä rivit 3 ja 10 kommenteiksi ja rivit 4 ja 11 pois kommenteista) tai 
-//muuta rivieltä 56 email ja 59 username joksikin muuksi
+//muuta rivieltä 56 email ja 59 username joksikin muuksi SYY:käyttäjän poistamista ei ole testeissä. Opelle tiedoksi, että 1.3. tähän tiedostoon on muutettu tämä kommentti
 
 const assert = require('assert')
 const chai = require('chai');
