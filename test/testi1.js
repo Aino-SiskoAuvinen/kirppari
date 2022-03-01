@@ -1,3 +1,6 @@
+//aja testit localhost tilassa (riveiltä 28-34 kommentointi pois ja server.js:stä rivit 3 ja 10 kommenteiksi ja rivit 4 ja 11 pois kommenteista) tai 
+//muuta rivieltä 56 email ja 59 username joksikin muuksi
+
 const assert = require('assert')
 const chai = require('chai');
 const expect = chai.expect;
